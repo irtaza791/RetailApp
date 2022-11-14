@@ -12,12 +12,13 @@ val TABLE_NAME = "PRODUCTS"
 val COL_NAME = "name"
 val COL_QT = "quantity"
 val COL_BARCODE = "barcode"
-class handler( var context:Context): SQLiteOpenHelper(context, DATABASE_NAME,null,1){
+
+class handler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 1) {
     override fun onCreate(db: SQLiteDatabase?) {
-    val createTable = "CREATE TABLE " + TABLE_NAME +" (" +
-            COL_BARCODE +" INTEGER," +
-            COL_NAME + " VARCHAR(256)," +
-            COL_QT + " INTEGER )"
+        val createTable = "CREATE TABLE " + TABLE_NAME + " (" +
+                COL_BARCODE + " INTEGER," +
+                COL_NAME + " VARCHAR(256)," +
+                COL_QT + " INTEGER )"
         db?.execSQL(createTable)
     }
 

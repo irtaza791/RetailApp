@@ -99,7 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:cardBackgroundColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/Cardview2"
         app:layout_constraintEnd_toEndOf="parent"
