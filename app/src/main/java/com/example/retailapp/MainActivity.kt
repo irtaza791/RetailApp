@@ -1,5 +1,6 @@
 package com.example.retailapp
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,54 +22,41 @@ import java.util.jar.Manifest
 class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,EasyPermissions.RationaleCallbacks {
     var Cardview1:CardView? = null
     var Cardview2:CardView? = null
-    var Cardview3:CardView? = null
+
     var scanbtn:Button? = null
     var codebtn:Button? = null
     var btnEnter:Button? = null
     var edtCode:EditText? = null
-    var productCode:TextView? = null
+
     var ptext:TextView? = null
     var hide:Animation? = null
     var reveal:Animation? = null
-    var btnStore:Button? = null
+    var guideText:TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Cardview1 = findViewById(R.id.Cardview1)
         Cardview2= findViewById(R.id.Cardview2)
-        Cardview3= findViewById(R.id.Cardview3)
+
         scanbtn = findViewById(R.id.scanbtn)
-        codebtn = findViewById(R.id.entercodebtn)
         btnEnter = findViewById(R.id.sbmtcode)
         edtCode = findViewById(R.id.codeText)
         ptext = findViewById(R.id.text)
-        productCode = findViewById(R.id.productCode)
-        btnStore = findViewById(R.id.store)
-
+        guideText = findViewById(R.id.guideText)
         hide = AnimationUtils.loadAnimation(this,android.R.anim.fade_out)
         reveal = AnimationUtils.loadAnimation(this,android.R.anim.fade_in)
-
         ptext!!.startAnimation(reveal)
         Cardview2!!.startAnimation(reveal)
-
         ptext!!.setText("Scan QR Code")
         Cardview2!!.visibility = View.VISIBLE
 
-        btnEnter!!.setOnClickListener{
-            if(edtCode!!.text.toString().isNullOrEmpty()){
-                Toast.makeText(this,"Please enter the code",Toast.LENGTH_SHORT).show()
-            }else{
-                var value =  edtCode!!.text.toString()
-                Toast.makeText(this,value,Toast.LENGTH_SHORT).show()
-            }
 
-        }
+
 
         scanbtn!!.setOnClickListener{
             ptext!!.startAnimation(reveal)
             Cardview1!!.startAnimation(hide)
             Cardview2!!.startAnimation(reveal)
-
             Cardview2!!.visibility = View.VISIBLE
             Cardview1!!.visibility = View.GONE
             ptext!!.setText("Scan QR Code")
@@ -78,27 +66,20 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
         Cardview2!!.setOnClickListener{
             cameraTask()
         }
-        codebtn!!.setOnClickListener{
-            ptext!!.startAnimation(reveal)
-            Cardview1!!.startAnimation(reveal)
-            Cardview2!!.startAnimation(hide)
-            Cardview3!!.startAnimation(hide)
-            Cardview3!!.visibility = View.GONE
-            Cardview2!!.visibility = View.GONE
-            Cardview1!!.visibility = View.VISIBLE
-            ptext!!.setText("Enter QR Code")
-        }
-        val context = this
-        btnStore!!.setOnClickListener{
-            val name: String = "Hello"
-            val quantity:Int = 1
-            val barcode:Int = 1230
-            var user = userObject(name,quantity,barcode)
-            var db = handler(context)
-            db.insertData(user)
-        }
 
+
+
+        btnEnter!!.setOnClickListener{
+            val message = edtCode!!.text.toString()
+            var intent: Intent = Intent(this,stroreproducts ::class.java).also {
+                it.putExtra("BARCODE",message)
+                startActivity(it)
+            }
+
+
+        }
     }
+
 
     private  fun cameraAccess():Boolean
     {
@@ -123,7 +104,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun  onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         var result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data)
         if(result != null){
@@ -135,8 +116,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
                 try {
                     Cardview1!!.startAnimation(reveal)
                     Cardview2!!.startAnimation(hide)
-                    Cardview3!!.visibility = View.VISIBLE
-                    productCode!!.setText(result.contents.toString())
+
                     Cardview2!!.visibility = View.GONE
                     edtCode!!.setText(result.contents.toString())
 
@@ -146,6 +126,8 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
                     edtCode!!.setText("")
 
                 }
+
+
             }
         }else{
 
@@ -153,6 +135,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
         if(requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE){
             Toast.makeText(this,"Permission Granted",Toast.LENGTH_SHORT).show()
         }
+
     }
     override fun onRequestPermissionsResult(
         requestCode: Int,

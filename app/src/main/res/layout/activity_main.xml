@@ -3,29 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:backgroundTint="#CAA7F7"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scan Products"
         android:layout_marginTop="50dp"
-        android:textStyle="bold"
-        android:textSize="22sp"
+        android:fontFamily="@font/bungee"
+        android:text="Scan Products"
         android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/Cardview1"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:cardBackgroundColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/Cardview2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +62,7 @@
                 android:layout_width="10dp"
                 android:layout_height="match_parent"
                 android:layout_weight=".4"
-                android:background="@color/teal_700"
+                android:background="@drawable/btnshape"
                 android:text="enter"
                 android:textColor="@color/white"
                 android:textSize="10sp" />
@@ -79,103 +83,37 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text">
+        app:layout_constraintTop_toTopOf="@+id/text">
+
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/white"
+            android:backgroundTint="#CAA7F7"
             android:padding="20dp"
             android:src="@drawable/qr_code_scan_svgrepo_com" />
 
 
-
-
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/Cardview3"
-        android:layout_width="match_parent"
+
+
+    <TextView
+        android:id="@+id/guideText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="50dp"
-        android:visibility="gone"
-        app:cardBackgroundColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/Cardview2"
+        android:fontFamily="sans-serif"
+        android:text="Please Click on the logo above or the Scan button to scan products"
+        android:textColor="@color/black"
+
+
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/productCode"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="Product code"
-                android:padding="12dp"
-                android:textAlignment="center"
-                android:textColorHint="@color/black"
-                android:textSize="20sp"
-                android:visibility="visible" />
-            <EditText
-                android:id="@+id/nameOfProduct"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="Enter the Name of Product"
-                android:padding="12dp"
-                android:textAlignment="center"
-                android:textColorHint="@color/black"
-                android:textSize="20sp"
-                android:visibility="visible"
-                android:layout_marginTop="10dp"
-                android:inputType="text"/>
-            <EditText
-                android:id="@+id/quantity"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="Enter the Quantity of Product"
-                android:padding="12dp"
-                android:textAlignment="center"
-                android:textColorHint="@color/black"
-                android:inputType="number"
-                android:textSize="20sp"
-                android:visibility="visible" />
-            <LinearLayout
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/store"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/teal_700"
-                    android:text="Store Item"
-                    android:textColor="@color/white" />
-                <Button
-                    android:id="@+id/sell"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/teal_700"
-                    android:text="Sell Item"
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-
-
-
-    </androidx.cardview.widget.CardView>
-
+        app:layout_constraintTop_toBottomOf="@+id/Cardview2" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -196,21 +134,12 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="@color/teal_700"
+            android:background="@drawable/btnshape"
+            android:fontFamily="@font/bungee"
             android:text="Scan Product"
             android:textColor="@color/white" />
 
-        <Button
-            android:id="@+id/entercodebtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
 
-            android:background="@color/teal_700"
-            android:text="Enter Code "
-            android:textColor="@color/white" />
 
     </LinearLayout>
 
