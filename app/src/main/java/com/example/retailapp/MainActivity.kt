@@ -17,14 +17,14 @@ import com.journeyapps.barcodescanner.CaptureActivity
 import org.json.JSONException
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
-import java.util.jar.Manifest
+
 
 class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,EasyPermissions.RationaleCallbacks {
     var Cardview1:CardView? = null
     var Cardview2:CardView? = null
 
     var scanbtn:Button? = null
-    var codebtn:Button? = null
+    var returnHomeScreen:Button? = null
     var btnEnter:Button? = null
     var edtCode:EditText? = null
 
@@ -32,12 +32,13 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
     var hide:Animation? = null
     var reveal:Animation? = null
     var guideText:TextView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Cardview1 = findViewById(R.id.Cardview1)
         Cardview2= findViewById(R.id.Cardview2)
-
+        returnHomeScreen = findViewById(R.id.returnHomeScreen)
         scanbtn = findViewById(R.id.scanbtn)
         btnEnter = findViewById(R.id.sbmtcode)
         edtCode = findViewById(R.id.codeText)
@@ -51,24 +52,20 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
         Cardview2!!.visibility = View.VISIBLE
 
 
-
-
         scanbtn!!.setOnClickListener{
             ptext!!.startAnimation(reveal)
-            Cardview1!!.startAnimation(hide)
-            Cardview2!!.startAnimation(reveal)
-            Cardview2!!.visibility = View.VISIBLE
-            Cardview1!!.visibility = View.GONE
+
             ptext!!.setText("Scan QR Code")
             cameraTask()
 
         }
+        returnHomeScreen!!.setOnClickListener{
+            var intent: Intent = Intent(this,HomeAct ::class.java)
+            startActivity(intent)
+        }
         Cardview2!!.setOnClickListener{
             cameraTask()
         }
-
-
-
         btnEnter!!.setOnClickListener{
             val message = edtCode!!.text.toString()
             var intent: Intent = Intent(this,stroreproducts ::class.java).also {
@@ -87,7 +84,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
     }
     private fun cameraTask(){
         if(cameraAccess()){
-                var scanner = IntentIntegrator(this)
+            var scanner = IntentIntegrator(this)
             scanner.setPrompt("scan a qr code")
             scanner.setCameraId(0)
             scanner.setOrientationLocked(true)

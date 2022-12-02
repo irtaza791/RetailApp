@@ -2,11 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:backgroundTint="#CAA7F7"
+    android:background="#CAA7F7"
     tools:context=".MainActivity">
+
+
+
+
 
     <TextView
         android:id="@+id/text"
@@ -15,7 +19,7 @@
         android:layout_marginTop="50dp"
         android:fontFamily="@font/bungee"
         android:text="Scan Products"
-        android:textColor="@color/black"
+        android:textColor="#FF5D4D71"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,20 +56,21 @@
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:padding="15dp"
-                android:text="Enter the code "
+                android:hint="Enter the code "
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:visibility="visible" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/sbmtcode"
                 android:layout_width="10dp"
                 android:layout_height="match_parent"
                 android:layout_weight=".4"
-                android:background="@drawable/btnshape"
+                android:background="#FF5D4D71"
+                android:backgroundTint="@color/purple_200"
                 android:text="enter"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
 
         </LinearLayout>
@@ -126,8 +131,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Cardview2">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/returnHomeScreen"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btnshape"
+            android:backgroundTint="@color/purple_200"
 
-        <Button
+            android:fontFamily="@font/bungee"
+            android:text="Return to home"
+            android:textColor="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/scanbtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -135,9 +153,12 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/btnshape"
+            android:backgroundTint="@color/purple_200"
+
             android:fontFamily="@font/bungee"
             android:text="Scan Product"
             android:textColor="@color/white" />
+
 
 
 

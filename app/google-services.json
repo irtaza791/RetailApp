@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "600930102705",
+    "project_id": "retailfriendapp",
+    "storage_bucket": "retailfriendapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600930102705:android:cd4b21e0a4c94d78a32190",
+        "android_client_info": {
+          "package_name": "com.example.retailapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600930102705-gsu1bcs8d2k9hmg559qetejuf9nctg5b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5MqY3aQ5Dx5YRk2Z_74xOHTPbB3io9hs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600930102705-gsu1bcs8d2k9hmg559qetejuf9nctg5b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
