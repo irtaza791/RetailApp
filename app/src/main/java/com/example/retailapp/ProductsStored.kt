@@ -18,7 +18,9 @@ import android.widget.SimpleCursorAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.firebase.database.DatabaseReference
 
 class ProductsStored : AppCompatActivity() {
 
@@ -41,8 +43,16 @@ class ProductsStored : AppCompatActivity() {
     lateinit var db : SQLiteDatabase
     lateinit var rs : Cursor
     lateinit var adapter: SimpleCursorAdapter
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
+
+
         setContentView(R.layout.activity_products_stored)
 
         listHeadings = findViewById(R.id.listHeadings)

@@ -12,6 +12,10 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.CaptureActivity
 import org.json.JSONException
@@ -20,6 +24,7 @@ import pub.devrel.easypermissions.EasyPermissions
 
 
 class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,EasyPermissions.RationaleCallbacks {
+    private lateinit var auth: FirebaseAuth
     var Cardview1:CardView? = null
     var Cardview2:CardView? = null
 
@@ -32,10 +37,16 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
     var hide:Animation? = null
     var reveal:Animation? = null
     var guideText:TextView? = null
+    var signoutbtn:Button? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+
+
         Cardview1 = findViewById(R.id.Cardview1)
         Cardview2= findViewById(R.id.Cardview2)
         returnHomeScreen = findViewById(R.id.returnHomeScreen)
@@ -50,18 +61,34 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
         Cardview2!!.startAnimation(reveal)
         ptext!!.setText("Scan QR Code")
         Cardview2!!.visibility = View.VISIBLE
+        signoutbtn = findViewById(R.id.signoutbtn)
+        auth = Firebase.auth
+
+
+
+
+        signoutbtn!!.setOnClickListener{
+            auth.signOut()
+            val intent: Intent = Intent(this,HomeAct ::class.java)
+
+            startActivity(intent)
+            finish()
+        }
+
+
+
 
 
         scanbtn!!.setOnClickListener{
             ptext!!.startAnimation(reveal)
-
             ptext!!.setText("Scan QR Code")
             cameraTask()
 
         }
         returnHomeScreen!!.setOnClickListener{
-            var intent: Intent = Intent(this,HomeAct ::class.java)
+            var intent: Intent = Intent(this,loadingpage ::class.java)
             startActivity(intent)
+            finish()
         }
         Cardview2!!.setOnClickListener{
             cameraTask()
@@ -71,6 +98,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
             var intent: Intent = Intent(this,stroreproducts ::class.java).also {
                 it.putExtra("BARCODE",message)
                 startActivity(it)
+                finish()
             }
 
 
@@ -85,7 +113,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
     private fun cameraTask(){
         if(cameraAccess()){
             var scanner = IntentIntegrator(this)
-            scanner.setPrompt("scan a qr code")
+            scanner.setPrompt("Scan QR/BARCODE of the product")
             scanner.setCameraId(0)
             scanner.setOrientationLocked(true)
             scanner.setBeepEnabled(true)
