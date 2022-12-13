@@ -1,6 +1,6 @@
 package com.example.retailapp
 
-import android.content.ContentValues
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,7 +15,6 @@ import androidx.cardview.widget.CardView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.CaptureActivity
 import org.json.JSONException
@@ -27,12 +26,10 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
     private lateinit var auth: FirebaseAuth
     var Cardview1:CardView? = null
     var Cardview2:CardView? = null
-
     var scanbtn:Button? = null
     var returnHomeScreen:Button? = null
     var btnEnter:Button? = null
     var edtCode:EditText? = null
-
     var ptext:TextView? = null
     var hide:Animation? = null
     var reveal:Animation? = null
@@ -43,10 +40,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-
-
         Cardview1 = findViewById(R.id.Cardview1)
         Cardview2= findViewById(R.id.Cardview2)
         returnHomeScreen = findViewById(R.id.returnHomeScreen)
@@ -69,16 +62,11 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
 
         signoutbtn!!.setOnClickListener{
             auth.signOut()
-            val intent: Intent = Intent(this,HomeAct ::class.java)
+            val intent = Intent(this,HomeAct ::class.java)
 
             startActivity(intent)
             finish()
         }
-
-
-
-
-
         scanbtn!!.setOnClickListener{
             ptext!!.startAnimation(reveal)
             ptext!!.setText("Scan QR Code")
@@ -86,7 +74,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
 
         }
         returnHomeScreen!!.setOnClickListener{
-            var intent: Intent = Intent(this,loadingpage ::class.java)
+            val intent = Intent(this,loadingpage ::class.java)
             startActivity(intent)
             finish()
         }
@@ -108,9 +96,12 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
 
     private  fun cameraAccess():Boolean
     {
+        // Function to check for the permission
        return EasyPermissions.hasPermissions(this,android.Manifest.permission.CAMERA)
     }
     private fun cameraTask(){
+        // On getting the permission to use the camera this function runs and it scans the code of the product
+        // if the permission is not granted it will ask for the permission
         if(cameraAccess()){
             var scanner = IntentIntegrator(this)
             scanner.setPrompt("Scan QR/BARCODE of the product")
@@ -131,7 +122,8 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
 
     override fun  onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        var result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data)
+        // parces the result code and store it into result variable and then setting the value to the textfield
+        val result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data)
         if(result != null){
             if(result.contents == null){
                 Toast.makeText(this,"Result not found",Toast.LENGTH_SHORT).show()
@@ -141,21 +133,17 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks,Ea
                 try {
                     Cardview1!!.startAnimation(reveal)
                     Cardview2!!.startAnimation(hide)
-
                     Cardview2!!.visibility = View.GONE
                     edtCode!!.setText(result.contents.toString())
 
                 }catch (exception:JSONException){
                     Toast.makeText(this,exception.localizedMessage,Toast.LENGTH_SHORT).show()
-
                     edtCode!!.setText("")
 
                 }
 
 
             }
-        }else{
-
         }
         if(requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE){
             Toast.makeText(this,"Permission Granted",Toast.LENGTH_SHORT).show()

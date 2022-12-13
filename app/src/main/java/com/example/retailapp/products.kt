@@ -1,6 +1,6 @@
 package com.example.retailapp
-
-data class products(var barcode:String ?= null,var name:String ?= null,var quantity: String ?= null)
+// object class for products
+data class products(var barcode:String ?= null,var name:String ?= null,var quantity: String ?= null,var encodedimg:String ?= null)
 
 
 

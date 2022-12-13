@@ -3,15 +3,11 @@ package com.example.retailapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
 import android.widget.Button
-import android.widget.Toast
-
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuth.*
-import com.google.firebase.auth.FirebaseUser
+
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.FirebaseDatabase
+
 import com.google.firebase.ktx.Firebase
 
 
@@ -22,15 +18,19 @@ class loadingpage : AppCompatActivity() {
     var scannerbtn: Button? = null
     var productsBtn: Button? = null
     var signoutbtn:Button? = null
-    val database = FirebaseDatabase.getInstance("https://retailapp-c7112-default-rtdb.europe-west1.firebasedatabase.app").reference
-    val currentUser = getInstance().currentUser?.uid
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loadingpage)
         auth = Firebase.auth
 
-
+        /*
+        The buttons include a "scanner" button, a "products" button, and a "sign out" button.
+        When the "scanner" button is clicked, the user is redirected to the app's main activity.
+        When the "products" button is clicked, the user is redirected to a "products view" activity.
+        When the "sign out" button is clicked, the user is signed out of their account and redirected to the app's home activity.
+         */
 
         signoutbtn = findViewById(R.id.signoutbtn)
         productsBtn = findViewById(R.id.productsBtn)
@@ -39,20 +39,20 @@ class loadingpage : AppCompatActivity() {
 
         signoutbtn!!.setOnClickListener{
             auth.signOut()
-            val intent: Intent = Intent(this,HomeAct ::class.java)
+            val intent = Intent(this,HomeAct ::class.java)
 
             startActivity(intent)
             finish()
         }
         scannerbtn!!.setOnClickListener{
-            val intent: Intent = Intent(this,MainActivity ::class.java)
+            val intent = Intent(this,MainActivity ::class.java)
             startActivity(intent)
             finish()
 
         }
         productsBtn!!.setOnClickListener{
 
-            val intent: Intent = Intent(this,ProductsView ::class.java)
+            val intent= Intent(this,ProductsView ::class.java)
             startActivity(intent)
             finish()
 

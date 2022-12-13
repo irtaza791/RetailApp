@@ -6,21 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import android.widget.Toast.*
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import java.util.UUID
+
 
 
 class HomeAct : AppCompatActivity() {
@@ -72,6 +64,13 @@ class HomeAct : AppCompatActivity() {
         }
 
     }
+
+    /*
+    register() is a function that allows a user to register for a new account in the app.
+    It takes the user's email address and password and sends them to Firebase for authentication.
+    If the authentication is successful, the user is redirected to a "loading page" activity, and a message is displayed to the user indicating that the authentication was successful.
+     If the authentication fails, a message is displayed to the user indicating the failure.
+     */
     private fun register(){
         val email = findViewById<EditText>(R.id.email)
         val password = findViewById<EditText>(R.id.password)
@@ -94,8 +93,7 @@ class HomeAct : AppCompatActivity() {
                     val intent: Intent = Intent(this,loadingpage ::class.java)
                     startActivity(intent)
                     finish()
-//                    val id = database.push().key
-                    makeText(baseContext,"Authenticatication Successful.", LENGTH_SHORT).show()
+                    makeText(baseContext,"Registration Successful.", LENGTH_SHORT).show()
 
                 }else{
                     makeText(baseContext,"Authentication failed.", LENGTH_SHORT).show()
@@ -108,6 +106,14 @@ class HomeAct : AppCompatActivity() {
             }
     }
 
+
+
+    /*
+    login() is a function that allows a user to log in to their account in the app.
+    It takes the user's email address and password and sends them to Firebase for authentication.
+    If the authentication is successful, the user is redirected to a "loading page" activity, and a message is displayed to the user indicating that the login was successful.
+    If the authentication fails, a message is displayed to the user indicating the failure.
+     */
 private fun login(){
     val email = findViewById<EditText>(R.id.email)
     val password = findViewById<EditText>(R.id.password)
@@ -123,7 +129,7 @@ private fun login(){
                 val intent: Intent = Intent(this,loadingpage ::class.java)
                 startActivity(intent)
                 finish()
-                makeText(baseContext,"Authenticatication Successful. ${FirebaseAuth.getInstance().currentUser?.uid}", LENGTH_SHORT).show()
+                makeText(baseContext,"Login Successful.", LENGTH_SHORT).show()
 
             }else{
                 makeText(baseContext,"Authentication failed.", LENGTH_SHORT).show()

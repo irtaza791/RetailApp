@@ -8,12 +8,17 @@
     android:background="#CAA7F7"
     tools:context=".HomeAct">
 
-    <SearchView
-        android:id="@+id/searchView2"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/productsSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:background="#CAA7F7"
         android:textAlignment="center"
+        app:queryHint="Search for products here"
+        app:iconifiedByDefault="false"
+        android:focusedByDefault="false"
+        android:backgroundTint="@color/purple_200"
         app:layout_constraintBottom_toTopOf="@+id/productList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,14 +39,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
+        android:layout_marginTop="8dp"
         app:layout_constraintBaseline_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/productList">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/returnHomeScreen"
+            android:id="@+id/pvHome"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -55,7 +60,7 @@
             android:textColor="@color/white" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/AddnewProduct"
+            android:id="@+id/pvANP"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
