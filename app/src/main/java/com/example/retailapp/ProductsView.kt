@@ -114,6 +114,7 @@ class ProductsView : AppCompatActivity() {
         })
     }
 
+
     private var simpleCallBack = object  : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),ItemTouchHelper.LEFT.or(ItemTouchHelper.RIGHT)){
         override fun onMove(
             recyclerView: RecyclerView,
@@ -124,18 +125,20 @@ class ProductsView : AppCompatActivity() {
             var endPosition = target.adapterPosition
 
             Collections.swap(productArrayList,startPosition,endPosition)
-
             recyclerView.adapter?.notifyItemMoved(startPosition,endPosition)
             return true
 
 
         }
 
+
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
 
             var position = viewHolder.adapterPosition
             val cu = FirebaseAuth.getInstance().currentUser?.uid.toString()
+
+
 
             dataRef = FirebaseDatabase.getInstance("https://retailapp-c7112-default-rtdb.europe-west1.firebasedatabase.app").getReference("${cu}/All Products").child(productArrayList[viewHolder.adapterPosition].barcode.toString())
             when(direction){
@@ -179,12 +182,14 @@ class ProductsView : AppCompatActivity() {
                     builder.show()
                 }
 
+
             }
 
         }
 
 
     }
+
     private fun updateProduct(newmessage:String){
 
        val message = newmessage

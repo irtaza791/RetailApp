@@ -18,6 +18,7 @@
         app:queryHint="Search for products here"
         app:iconifiedByDefault="false"
         android:focusedByDefault="false"
+
         android:backgroundTint="@color/purple_200"
         app:layout_constraintBottom_toTopOf="@+id/productList"
         app:layout_constraintEnd_toEndOf="parent"

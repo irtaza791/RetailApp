@@ -1,5 +1,6 @@
 package com.example.retailapp
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 
@@ -30,6 +32,7 @@ class MyAdapter(private var productList : ArrayList<products>) : RecyclerView.Ad
         return  MyViewHolder(producView)
     }
 
+
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = productList[position]
 
@@ -39,7 +42,10 @@ class MyAdapter(private var productList : ArrayList<products>) : RecyclerView.Ad
         val decodedImg = currentItem.encodedimg?.let { decodingImg(it) }
         holder.imgDisplay.setImageBitmap(decodedImg)
 
+        holder.itemView.setOnLongClickListener {
 
+            true
+        }
     }
     private fun decodingImg(imgString : String): Bitmap {
         val imageBytes = Base64.decode(imgString, Base64.NO_WRAP)
@@ -50,20 +56,11 @@ class MyAdapter(private var productList : ArrayList<products>) : RecyclerView.Ad
     override fun getItemCount(): Int {
         return productList.size
     }
-//    fun filter(searchQuery: String) {
-//        // Create a new list to store the filtered items
-//        val filteredList = arrayListOf<products>()
-//
-//        // Iterate over the list of products in the adapter
-//        for (product in productList) {
-//            // If the product matches the search query, add it to the filtered list
-//            if (product.name!!.contains(searchQuery) || product.barcode!!.contains(searchQuery)) {
-//                filteredList.add(product)
-//            }
-//        }
-//        productList = filteredList
-//        notifyDataSetChanged()
-//    }
+
+
+
+
+
 
 
     inner class MyViewHolder(productView : View ) : RecyclerView.ViewHolder(productView){
@@ -76,13 +73,21 @@ class MyAdapter(private var productList : ArrayList<products>) : RecyclerView.Ad
         init {
             productView.setOnClickListener{
                 val position: Int = adapterPosition
+                val currentItem = productList[position]
 
-                Toast.makeText(productView.context,"You clicked on ${clicked[position].barcode}",Toast
-                    .LENGTH_LONG).show()
+                // Launch the new activity here
+                val intent = Intent(productView.context, productDetailsActivity::class.java)
+                intent.putExtra("barcode", currentItem.barcode)
+                intent.putExtra("name", currentItem.name)
+                intent.putExtra("quantity", currentItem.quantity)
+                intent.putExtra("encodedimg", currentItem.encodedimg)
+                startActivity(productView.context, intent, null)
 
+                true
+            }
         }
 
 
        }
     }
-}
+
